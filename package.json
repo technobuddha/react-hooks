@@ -1,0 +1,56 @@
+{
+  "name": "@technobuddha/react-hooks",
+  "version": "1.6.0",
+  "description": "A small library of React hooks",
+  "author": {
+    "name": "Phil Hill",
+    "email": "phil@technobuddha.com"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/technobuddha/@technobuddha/react-hooks"
+  },
+  "bugs": {
+    "url": "https://github.com/technobuddha/@technobuddha/react-hooks/issues"
+  },
+  "homepage": "https://github.com/technobuddha/@technobuddha/react-hooks#readme",
+  "keywords": [
+    "react",
+    "hooks"
+  ],
+  "scripts": {
+    "prebuild": "rm -rf dist",
+    "build": "tsc -b src/tsconfig.code.json",
+    "test": "TZ=America/New_York vitest"
+  },
+  "packageManager": "yarn@4.6.0",
+  "devDependencies": {
+    "@giancosta86/typedoc-readonly": "1.0.1",
+    "@technobuddha/project": "0.0.161",
+    "@types/lodash-es": "^4",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "jest-matcher-deep-close-to": "3.0.2",
+    "typedoc": "0.27.9",
+    "typedoc-plugin-markdown": "4.4.2",
+    "typedoc-plugin-mdn-links": "5.0.1"
+  },
+  "technobuddhaProject": {
+    "version": "0.0.161",
+    "created": "2020-04-01T04:20:42.694Z",
+    "updated": "2025-03-12T11:06:09.239Z"
+  },
+  "type": "module",
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "dependencies": {
+    "@technobuddha/library": "^1.9.0",
+    "lodash-es": "4.17.21",
+    "react": "19.0.0",
+    "react-dom": "19.0.0"
+  }
+}
