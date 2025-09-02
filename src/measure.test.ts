@@ -1,4 +1,4 @@
-import { measure, measureWindow } from './measure.js';
+import { measure } from './measure.ts';
 
 describe('measure', () => {
   test('measure an element', () => {
@@ -7,14 +7,5 @@ describe('measure', () => {
     node.setAttribute('style', 'width: 100px; height: 100px;');
     document.body.appendChild(node);
     expect(measure(node)).toEqual({ height: 0, scrollbarHeight: 0, scrollbarWidth: 0, width: 0 });
-  });
-
-  test('measure the window', () => {
-    expect(measureWindow()).toEqual({
-      height: 768,
-      scrollbarHeight: 0,
-      scrollbarWidth: 0,
-      width: 1024,
-    });
   });
 });

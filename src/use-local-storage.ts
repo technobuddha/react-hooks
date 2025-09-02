@@ -1,30 +1,48 @@
 import React from 'react';
-import { isFunction } from 'lodash-es';
+import { isFunction } from '@technobuddha/library';
+import { type JsonValue } from 'type-fest';
 
 /**
- * Similar to `React.useState`, returns a stateful value and a function to update it.  The state
+ * Similar to `React.useState`, returns a stateful value and a function to update it. The state
  * value is also saved in `localStorage`.
  *
- * When initializing, if the key exists in `localStorage` the stored value is used, otherwise
+ * Only values that are valid `JsonValue` (from type-fest) are supported, as all values are serialized
+ * with `JSON.stringify`.
+ *
+ * When initializing, if the key exists in `localStorage`, the stored value is used. Otherwise,
  * the `initialState` value is used.
  *
- * NOTE: values stored in localStorage are serialized using JSON.stringify.  Some types of objects
- * will not serialize and deserialize correctly.
+ * @param key - The keyname to use for storing the value in `localStorage`.
+ * @param initialState - Initial state value or a function returning the initial state.
+ * @returns [ stateValue, setterFunction ].
  *
- * @param key - The keyname to use for storing the value in `localStorage`
- * @param initialState - Initial state value, or a function that returns the initial state value.
- * @returns [ stateValue, setterFunction ]
+ * @example
+ * ```typescript
+ * function Counter() {
+ *   const [count, setCount] = useLocalStorage('count', 0);
+ *   return (
+ *     <div>
+ *       <div>Count: {'{'}count{'}'}</div>
+ *       <button onClick={() => setCount(c => c + 1)}>Increment</button>
+ *       <button onClick={() => setCount(0)}>Reset</button>
+ *     </div>
+ *   );
+ * }
+ * ```
  */
-export function useLocalStorage<T>(
+export function useLocalStorage<T extends JsonValue>(
   key: string,
-  initialState: T,
+  initialState: T | (() => T),
 ): readonly [T, (newValue: T | ((oldValue: T) => T)) => void] {
   const [value, setValue] = React.useState<T>(() => {
     try {
       const item = localStorage.getItem(key);
-      return item ? JSON.parse(item) : initialState;
+      if (item) {
+        return JSON.parse(item);
+      }
+      return isFunction(initialState) ? (initialState as () => T)() : initialState;
     } catch {
-      return initialState;
+      return isFunction(initialState) ? (initialState as () => T)() : initialState;
     }
   });
 
@@ -33,7 +51,6 @@ export function useLocalStorage<T>(
       setValue((oldValue) => {
         const val = isFunction(newValue) ? newValue(oldValue) : newValue;
 
-        // eslint-disable-next-line no-empty
         try {
           localStorage.setItem(key, JSON.stringify(val));
         } catch {}

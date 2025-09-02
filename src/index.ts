@@ -1,6 +1,12 @@
-export { useDerivedState } from './use-derived-state.js';
-export { useLocal } from './use-local.js';
-export { useLocalStorage } from './use-local-storage.js';
-export { usePrevious } from './use-previous.js';
-export { useWhyDidIRender } from './use-why-did-i-render.js';
-export { useWindowSize } from './use-window-size.js';
+export { changed } from './changed.ts';
+export { measure } from './measure.ts';
+export { measureWindow } from './measure-window.ts';
+export { scrollbarSize } from './scrollbar-size.ts';
+export { type ScrollbarSize, type Size } from './size.ts';
+export { useDerivedState } from './use-derived-state.ts';
+export { useHMR } from './use-hmr.ts';
+export { useLocal } from './use-local.ts';
+export { useLocalStorage } from './use-local-storage.ts';
+export { usePrevious } from './use-previous.ts';
+export { useWhyDidIRender } from './use-why-did-i-render.ts';
+export { useWindowSize } from './use-window-size.ts';

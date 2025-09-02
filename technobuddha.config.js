@@ -9,7 +9,7 @@ const config = {
   },
   directories: {
     src: {
-      environment: 'browser',
+      environment: 'vite-client',
     },
   },
 };

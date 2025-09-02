@@ -2,13 +2,28 @@ import React from 'react';
 import { isFunction } from 'lodash-es';
 
 /**
- * Return the 'previous' value of an expression.
+ * Tracks the previous value of a variable across renders.
  *
- * On the first render, the value will be `undefined`.  On the second and subsequent renders,
- * the value returned will be the previous value.
+ * On the first render, returns `undefined`. On subsequent renders, returns the value from the previous render.
+ * If you pass a function, it will be called with the previous value to compute the new value.
  *
- * @param value The 'current' value, or a function to return the current value
+ * Useful for comparing previous and current values, animations, or debugging.
+ *
+ * @param value - The current value, or a function that receives the previous value and returns the new value.
  * @returns The previous value.
+ *
+ * @example
+ * ```typescript
+ * function Example({ count }: { count: number }) {
+ *   const prevCount = usePrevious(count);
+ *   return (
+ *     <div>
+ *       <div>Current: {'{'}count{'}'}</div>
+ *       <div>Previous: {'{'}prevCount{'}'}</div>
+ *     </div>
+ *   );
+ * }
+ * ```
  */
 export function usePrevious<T>(value: T | ((prevValue: T | undefined) => T)): T | undefined {
   const ref = React.useRef<T | undefined>(undefined);

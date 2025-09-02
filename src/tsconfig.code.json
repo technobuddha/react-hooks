@@ -7,7 +7,7 @@
     "composite": true,
     "rootDir": ".",
     "outDir": "../dist",
-    "types": [],
+    "types": ["vite/client"],
     "lib": ["esnext", "dom"]
   },
   "include": ["*.ts"],

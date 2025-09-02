@@ -1,30 +1,47 @@
 import React from 'react';
 import { throttle } from 'lodash-es';
-import { measureWindow, type Size } from './measure';
+
+import { measureWindow } from './measure-window.ts';
+import { type Size } from './size.ts';
 
 /**
  * Gets the current window size, including the dimensions of the scroll bars.
  *
- * If the actual size of the window is unimportant, it also returns a count of how many times the window
- * has been resized since the first render.
+ * Also returns a `count` property, which increments each time the window is resized (since mount).
  *
- * @returns [{ width, height, scrollbarWidth, scrollbarHeight, count }
+ * @returns An object: `{ width, height, scrollbarWidth, scrollbarHeight, count }`.
  */
 export function useWindowSize(): Size & { count: number } {
+  const isClient = globalThis.window !== undefined;
   const [count, setCount] = React.useState(0);
-  const [size, setSize] = React.useState(measureWindow());
+  const [size, setSize] = React.useState(() =>
+    isClient ? measureWindow() : { width: 0, height: 0, scrollbarWidth: 0, scrollbarHeight: 0 },
+  );
+
+  // Persist the throttled function across renders
+  const updateSizeRef = React.useRef<ReturnType<typeof throttle>>(null);
 
   React.useLayoutEffect(() => {
-    const updateSize = throttle(() => {
+    if (!isClient) {
+      return;
+    }
+    updateSizeRef.current = throttle(() => {
       setSize(measureWindow());
       setCount((c) => c + 1);
     });
-    window.addEventListener('resize', updateSize);
+    const handler = updateSizeRef.current;
+
+    // Use ResizeObserver for robust resize detection
+    const observer = new ResizeObserver(handler);
+    observer.observe(globalThis.window.document.documentElement);
 
     return () => {
-      window.removeEventListener('resize', updateSize);
+      if (handler) {
+        handler.cancel();
+      }
+      observer.disconnect();
     };
-  });
+  }, [isClient]);
 
   return { ...size, count };
 }

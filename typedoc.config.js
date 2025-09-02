@@ -1,51 +1,23 @@
 //@ts-check
-/**
- * @import { TypeDocOptions } from 'typedoc';
- * @import { PluginOptions } from 'typedoc-plugin-markdown';
- */
-
-/**
- * @type Partial<TypeDocOptions & PluginOptions>
- */
+/** @type {import('typedoc').TypeDocOptions} */
 const config = {
-  entryPoints: ['src/index.ts'],
-  exclude: [],
+  // Configuration
+  name: 'react-hooks',
   tsconfig: 'src/tsconfig.code.json',
-  out: 'doc',
-
-  expandObjects: true,
-  expandParameters: true,
-
-  indexFormat: 'table',
-  parametersFormat: 'table',
-  interfacePropertiesFormat: 'table',
-  classPropertiesFormat: 'table',
-  enumMembersFormat: 'table',
-  propertyMembersFormat: 'table',
-  typeDeclarationFormat: 'table',
-
-  typeDeclarationVisibility: 'verbose',
-
-  hidePageHeader: true,
-  entryFileName: 'INDEX.md',
-  readme: 'none',
+  // Input
+  entryPoints: ['src/index.ts'],
+  entryPointStrategy: 'resolve',
+  excludeInternal: true,
   excludePrivate: true,
-  plugin: [
-    'typedoc-plugin-markdown',
-    'typedoc-plugin-mdn-links',
-    '@giancosta86/typedoc-readonly',
-    './typedoc-markdown-plugin.js',
-  ],
+  excludeProtected: true,
   gitRevision: 'main',
-
+  readme: 'none',
+  //  Output
+  basePath: '.',
+  //  Organization
   categorizeByGroup: true,
-  navigation: {
-    includeCategories: true,
-    includeGroups: true,
-    includeFolders: false,
-    compactFolders: false,
-    excludeReferences: true,
-  },
+  defaultCategory: 'Uncategorized',
+  categoryOrder: ['Uncategorized', '*'],
 };
 
 export default config;

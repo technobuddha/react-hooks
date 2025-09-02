@@ -1,34 +1,21 @@
-type ScrollbarSize = {
-  scrollbarWidth: number;
-  scrollbarHeight: number;
-};
+import { scrollbarSize } from './scrollbar-size.ts';
+import { type Size } from './size.ts';
 
-export type Size = ScrollbarSize & {
-  width: number;
-  height: number;
-};
-
-export function getScrollbarSize(): ScrollbarSize {
-  const node = document.createElement('div');
-
-  node.setAttribute(
-    'style',
-    'width: 100px; height: 100px; position: absolute; top: -1000000px; overflow: scroll;',
-  );
-  document.body.appendChild(node);
-
-  const scrollbarWidth = node.offsetWidth - node.clientWidth;
-  const scrollbarHeight = node.offsetHeight - node.clientHeight;
-
-  document.body.removeChild(node);
-
-  return { scrollbarWidth, scrollbarHeight };
-}
-
+/**
+ * Measures the size of an HTMLElement.
+ *
+ * @param element - The HTMLElement to measure.
+ * @returns Properties: width, height, scrollbarWidth, scrollbarHeight.
+ *
+ * @example
+ * ```typescript
+ * const el = document.getElementById('myDiv');
+ * if (el) {
+ *   const size = measure(el);
+ *   // size: { width: 1024, height: 768, scrollbarWidth: 16, scrollbarHeight: 16 }
+ * }
+ * ```
+ */
 export function measure(element: HTMLElement): Size {
-  return { width: element.offsetWidth, height: element.offsetHeight, ...getScrollbarSize() };
-}
-
-export function measureWindow(): Size {
-  return { width: window.innerWidth, height: window.innerHeight, ...getScrollbarSize() };
+  return { width: element.offsetWidth, height: element.offsetHeight, ...scrollbarSize() };
 }
