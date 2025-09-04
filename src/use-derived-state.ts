@@ -1,7 +1,6 @@
 import React from 'react';
+import { changed } from '@technobuddha/library';
 import { isFunction } from 'lodash-es';
-
-import { changed } from './changed.ts';
 
 /**
  * Like `useState`, but the value is re-initialized from `initialValue` whenever `deps` change.
@@ -27,6 +26,8 @@ import { changed } from './changed.ts';
  *   );
  * }
  * ```
+ * @group React
+ * @category Hooks
  */
 export function useDerivedState<T>(
   initialValue: T | ((prevValue: T) => T),

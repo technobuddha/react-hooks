@@ -26,7 +26,7 @@
   },
   "packageManager": "yarn@4.6.0",
   "devDependencies": {
-    "@technobuddha/project": "0.0.183",
+    "@technobuddha/project": "0.99.1",
     "@testing-library/react": "16.3.0",
     "@types/lodash-es": "^4.17.12",
     "@types/react": "^19.1.12",
@@ -37,18 +37,18 @@
     "vitest": "3.2.4"
   },
   "technobuddhaProject": {
-    "version": "0.0.183",
+    "version": "0.99.1",
     "created": "2020-04-01T04:20:42.694Z",
-    "updated": "2025-09-02T10:46:19.290Z"
+    "updated": "2025-09-04T20:11:22.491Z"
   },
   "type": "module",
   "engines": {
-    "node": ">=22.0.0"
+    "node": ">=24.0.0"
   },
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "dependencies": {
-    "@technobuddha/library": "^1.9.46",
+    "@technobuddha/library": "1.9.47",
     "lodash-es": "4.17.21",
     "react": "19.1.1",
     "react-dom": "19.1.1",

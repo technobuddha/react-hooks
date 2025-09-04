@@ -9,7 +9,9 @@ import { type Size } from './size.ts';
  *
  * Also returns a `count` property, which increments each time the window is resized (since mount).
  *
- * @returns An object: `{ width, height, scrollbarWidth, scrollbarHeight, count }`.
+ * @returns width, height, scrollbarWidth, scrollbarHeight, count
+ * @group React
+ * @category Hooks
  */
 export function useWindowSize(): Size & { count: number } {
   const isClient = globalThis.window !== undefined;

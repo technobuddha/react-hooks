@@ -1,4 +1,3 @@
-export { changed } from './changed.ts';
 export { measure } from './measure.ts';
 export { measureWindow } from './measure-window.ts';
 export { scrollbarSize } from './scrollbar-size.ts';

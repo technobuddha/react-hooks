@@ -26,6 +26,8 @@ export function hot(): ViteHotContext | undefined {
  * @remarks
  * In a non-Vite environment or in a production environment, this hook will always return 0, and
  * never update.
+ * @group React
+ * @category Hooks
  */
 export function useHMR(): number {
   const [hmr, setHMR] = React.useState(0);

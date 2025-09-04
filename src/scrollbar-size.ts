@@ -9,6 +9,7 @@ import { type ScrollbarSize } from './size.ts';
  *
  * @returns `scrollbarWidth` and `scrollbarHeight`.
  * @group DOM
+ * @category Analysis
  */
 export function scrollbarSize(): ScrollbarSize {
   const node = document.createElement('div');

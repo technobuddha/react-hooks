@@ -24,6 +24,8 @@ import { isFunction } from 'lodash-es';
  *   );
  * }
  * ```
+ * @group React
+ * @category Hooks
  */
 export function usePrevious<T>(value: T | ((prevValue: T | undefined) => T)): T | undefined {
   const ref = React.useRef<T | undefined>(undefined);

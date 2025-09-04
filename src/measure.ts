@@ -15,6 +15,8 @@ import { type Size } from './size.ts';
  *   // size: { width: 1024, height: 768, scrollbarWidth: 16, scrollbarHeight: 16 }
  * }
  * ```
+ * @group DOM
+ * @category Analysis
  */
 export function measure(element: HTMLElement): Size {
   return { width: element.offsetWidth, height: element.offsetHeight, ...scrollbarSize() };

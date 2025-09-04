@@ -23,6 +23,8 @@ import { isFunction } from 'lodash-es';
  *   );
  * }
  * ```
+ * @group React
+ * @category Hooks
  */
 export function useLocal<T>(initialState: T | (() => T)): [T, (set: T | ((prev: T) => T)) => void] {
   const localRef = React.useRef<T>(isFunction(initialState) ? initialState() : initialState);

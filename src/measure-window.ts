@@ -11,6 +11,8 @@ import { type Size } from './size.ts';
  * const size = measureWindow();
  * // size: { width: number, height: number, scrollbarWidth: number, scrollbarHeight: number \}
  * ```
+ * @group DOM
+ * @category Analysis
  */
 export function measureWindow(): Size {
   return { width: window.innerWidth, height: window.innerHeight, ...scrollbarSize() };

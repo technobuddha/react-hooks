@@ -29,6 +29,8 @@ import { type JsonValue } from 'type-fest';
  *   );
  * }
  * ```
+ * @group React
+ * @category Hooks
  */
 export function useLocalStorage<T extends JsonValue>(
   key: string,
